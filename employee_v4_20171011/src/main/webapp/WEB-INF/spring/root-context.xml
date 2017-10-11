@@ -49,7 +49,7 @@
 	</bean>
 
 	
-	<!-- @Repository 어노테이션 인식을 위한 설정 -->
+	<!-- @Repository , @Service 어노테이션 인식을 위한 설정 -->
 	<context:component-scan base-package="com.test.sts" />
 
 </beans>

@@ -1,10 +1,8 @@
 package com.test.sts;
 
 
-//�ڷ��� Ŭ����
 public class Employee {
 	
-	//����) ��� ���� �� getter, setter ����
 	private String name_, ssn, hiredate, phone, job_title, dept_name, reg_name, birthdate, emp_id, job_id, dept_id, reg_id, id_, pw, pid, pic_filename;
 	private int basicpay, extrapay, pay, grade, lunar, min_basicpay;
 	
