@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper></mapper> 엘리먼트는 MyBatis 설정 XML 파일의 루트 엘리먼트 -->
+<!-- namespcae="" 메소드 호출시 식별자로 사용된다. -->
+<mapper namespace="com.test.sts.EmployeeMapper">
+
+	<!-- <select></select> 엘리먼트는 SELECT 쿼리 등록시 사용 -->
+	<!-- id="" 속성은 메소드 호출시 식별자로 사용된다. -->
+	<!-- resultType="" 속성은 SELECT 쿼리 결과를 저장하고 매핑할 자료형 클래스 지정 -->
+	<!-- 주의) 컬럼의 이름과 타입이 자료형 클래스의 멤버변수와 일치하는 경우 자동 매핑된다. -->
+	
+	<!-- 	
+	CREATE OR REPLACE VIEW "EMPVIEW" 
+	AS 
+	SELECT e_.emp_id as emp_id, name_ , ssn, TO_CHAR(birthdate, 'YYYY-MM-DD') AS birthdate, lunar, TO_CHAR(hiredate, 'YYYY-MM-DD') AS hiredate, phone, job_title, j.job_id AS job_id
+	, dept_name, dept.dept_id as dept_id, reg_name, reg.reg_id as reg_id, basicpay, extrapay
+	, (basicpay + extrapay) AS pay
+	, pid as pid, pic_filename as pic_filename
+	, (SELECT LISTAGG(ID_||'/'||GRADE, ',') WITHIN GROUP (ORDER BY id_) FROM login WHERE emp_id=e_.emp_id) AS id_
+	FROM emp e_, region reg, department dept, jobs j, employeePicture p_
+	WHERE e_.reg_id = reg.reg_id
+	    AND e_.dept_id = dept.dept_id
+	    AND e_.job_id = j.job_id
+	    AND e_.emp_id = p_.emp_id(+);
+	-->
+     	
+	<select id="employeeList" resultType="com.test.sts.Employee">
+		SELECT emp_id, NAME_, ssn,  lunar,birthdate, hiredate, phone, job_title, job_id, dept_name, dept_id, reg_name, reg_id, basicpay, extrapay, pay, pid, pic_filename, id_
+		FROM empView ORDER BY emp_id
+	</select>
+
+
+	<select id="regionList" resultType="com.test.sts.Employee">
+		SELECT reg_id, reg_name FROM region ORDER BY reg_id
+	</select>
+	
+	<select id="departmentList" resultType="com.test.sts.Employee">
+		SELECT dept_id, dept_name FROM department ORDER BY dept_id
+	</select>
+
+	<select id="positionList" resultType="com.test.sts.Employee">
+		SELECT job_id, job_title, min_basicpay FROM jobs ORDER BY job_id
+	</select>
+
+</mapper>  
